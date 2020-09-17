@@ -7,7 +7,7 @@ sfr_3484 = pd.read_csv('./out_files/d157_SFR.dat',delimiter=' ')
 age_myr = np.array(sfr_3484['log[Age(Myr)]'])
 sfr = np.array(sfr_3484['d157_SFR'])
 
-## read some other age array from any other file
+## read some other age array from any other file for any other galaxy
 sfr_3254 = pd.read_csv('./out_files/d127_SFR.dat',delimiter=' ')
 age = np.array(sfr_3254['log[Age(Myr)]'])
 
