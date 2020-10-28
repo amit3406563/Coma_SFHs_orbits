@@ -15,7 +15,7 @@ from matplotlib.ticker import AutoMinorLocator
 ###############################################################################
 # creating directory for saving output files
 ###############################################################################
-out_dir = './out_files/'
+out_dir = './out_files_steckmap/phr/'
 if os.path.exists(out_dir):
     shutil.rmtree(out_dir)
 os.makedirs(out_dir)
@@ -24,7 +24,7 @@ os.makedirs(out_dir)
 # making list of STECKMAP output data file names
 ###############################################################################
 datafiles = [os.path.join(root, name)
-             for root, dirs, files in os.walk("./steckmap_out_files/")
+             for root, dirs, files in os.walk("./steckmap_out/miles_out/")
              for name in files
              if name.endswith(".txt")]
 
@@ -34,11 +34,19 @@ nFiles = len(datafiles)
 # Finding number of entries
 ###############################################################################
 nEntries = np.array([])
-
 for i in range(nFiles):
     f = open(datafiles[i],'r')
     firstLine = f.readline()
     firstLineTxt = firstLine.rstrip().split(" ")
+    ## note: use commented code below only for 'PHR' case
+    # if i==5 or i==11 or i==17 or i==23 or i==29 or i==35 or i==41 or i==47 or i==53 or i==59 or i==65 or i==71:
+    #     nE=firstLineTxt[7]
+    # else:
+    #     if firstLineTxt[8]=='':
+    #         nE=firstLineTxt[9]
+    #     else:
+    #         nE=firstLineTxt[8]
+    ## note: comment the next 4 lines of code for 'PHR' case
     if firstLineTxt[8]=='':
         nE=firstLineTxt[9]
     else:
@@ -73,12 +81,11 @@ for i in range(idx):
 filenames = np.array([])
 for i in range(nFiles):
     df = str(datafiles[i])
-    temp1 = df.split('\\')
-    temp2 = temp1[1].split('-')
-    temp3 = temp2[0].split('_')
-    temp4 = temp3[0] + '_' + temp2[1]
-    temp5 = temp4.split('.')
-    filename = temp5[0]
+    temp1 = df.split('-')
+    temp2 = temp1[1].split('.')
+    temp3 = temp1[0].split('/')
+    temp4 = temp3[3].split('_')
+    filename = temp4[0]+'_'+temp2[0]
     filenames = np.append(filenames,filename)
     
 ###############################################################################
