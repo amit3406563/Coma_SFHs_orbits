@@ -1,4 +1,6 @@
 # MSc_Astronomy
+(to be completed)
+
 All codes related to my masters research 2019-2020 and further for publication in Astonomy and Astrophyscs (A&A) journal 2020-2021
 
 Title: Star formation histories of Coma Cluster galaxies matched to simulated orbits hint at quenching around first pericenter
