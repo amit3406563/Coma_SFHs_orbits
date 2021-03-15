@@ -24,7 +24,7 @@ os.makedirs(out_dir)
 # making list of STECKMAP output data file names
 ###############################################################################
 datafiles = [os.path.join(root, name)
-             for root, dirs, files in os.walk("./steckmap_out/miles_out/")
+             for root, dirs, files in os.walk("./steckmap_out/phr_out/")
              for name in files
              if name.endswith(".txt")]
 
@@ -39,18 +39,18 @@ for i in range(nFiles):
     firstLine = f.readline()
     firstLineTxt = firstLine.rstrip().split(" ")
     ## note: use commented code below only for 'PHR' case
-    # if i==5 or i==11 or i==17 or i==23 or i==29 or i==35 or i==41 or i==47 or i==53 or i==59 or i==65 or i==71:
-    #     nE=firstLineTxt[7]
-    # else:
-    #     if firstLineTxt[8]=='':
-    #         nE=firstLineTxt[9]
-    #     else:
-    #         nE=firstLineTxt[8]
-    ## note: comment the next 4 lines of code for 'PHR' case
-    if firstLineTxt[8]=='':
-        nE=firstLineTxt[9]
+    if i==5 or i==11 or i==17 or i==23 or i==29 or i==35 or i==41 or i==47 or i==53 or i==59 or i==65 or i==71:
+        nE=firstLineTxt[7]
     else:
-        nE=firstLineTxt[8]
+        if firstLineTxt[8]=='':
+            nE=firstLineTxt[9]
+        else:
+            nE=firstLineTxt[8]
+    ## note: comment the next 4 lines of code for 'PHR' case
+    # if firstLineTxt[8]=='':
+    #     nE=firstLineTxt[9]
+    # else:
+    #     nE=firstLineTxt[8]
     nEntries = np.append(nEntries,float(nE))
     f.close()
 

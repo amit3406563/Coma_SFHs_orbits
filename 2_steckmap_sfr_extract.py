@@ -11,7 +11,7 @@ import shutil
 import numpy as np
 import pandas as pd
 
-out_dir = './steckmap_sfr_tables/miles/'
+out_dir = './steckmap_sfr_tables/phr/'
 if os.path.exists(out_dir):
     shutil.rmtree(out_dir)
 os.makedirs(out_dir)
