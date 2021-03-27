@@ -8,7 +8,7 @@
 
 Code Author: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)<br />
 In collaboration with: **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen)<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)
+&emsp; &emsp; **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)
                        
 Codes: Python and Yorrick
 
