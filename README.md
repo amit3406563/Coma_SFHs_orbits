@@ -13,10 +13,12 @@
                        
 Programming Languages: **Python** and **Yorrick** <br />
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
 | Filenames                 | Description of code files                                                           |
 |---------------------------|-------------------------------------------------------------------------------------|
 | 1_steckmap_plot.py        | Reads the STECKMAP output files containing SAD, MASS, SFR, AMR, LOSVD, and Spectra information for different SSPs, namely, MILES, BC03, and PHR. |
 | 2_steckmap_sfr_extract.py | Extracts SFR tables from STECKMAP output tables. |
 | 3_sfr_ssfr_compute.py     | SFR values are smoothed by interpolation and relative SFRs are computed, SSFR is computed, and the SFR and SSFR tables are saved. |
 | 4_sfr_ssfr_plot.py        | Plots SFR and SSFR and saves plots. |
-| 5_read_sim_tab.py         | Reads orbit simulation tables from HDF5 file and separately saves the output tables containing orbital parameters for satellites (M<sub>host<sub />, M<sub>sat<sub \>, R, V, M<sub>inf<sub />, M<sub>max<sub />, r, r<sub>min<sub />, t<sub>inf<sub />, t<sub>peri<sub />, v, v<sub>max<sub />). |
+| 5_read_sim_tab.py         | Reads orbit simulation tables from HDF5 file and separately saves the output tables containing orbital parameters for satellites $M_sat$. |
