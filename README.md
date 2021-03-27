@@ -6,9 +6,11 @@
 
 *All codes related to my masters research during 2019-2020 and further work during 2020-21 for publication in Astonomy and Astrophyscs (A&A) journal in 2021.*
 
-Code Author: &emsp; &emsp; &emsp; **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)<br />
-In collaboration with: **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen)<br />
-&emsp; &emsp; &emsp; &emsp; **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)
+| <!-- -->               | <!-- -->                                                                             |
+|------------------------|--------------------------------------------------------------------------------------|
+| Code Author:           | **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)    |
+| In collaboration with: | **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen) |
+|                        | **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)             |
                        
 Codes: Python and Yorrick
 
