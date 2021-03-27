@@ -27,7 +27,10 @@ z = np.linspace(0.,1.6,17)
 Omz = Planck13.Om(z) 
 #rhoc_0 = Planck13.critical_density(0).to(u.Msun / u.Mpc ** 3).value
 rhoc_z = Planck13.critical_density(z).to(u.kg / u.m**3)
-rho_z = 360 * Omz * rhoc_z
+# Delta_vir
+x = Omz - 1
+Del_vir_z = (18*np.pi**2 + 82*x -39*x**2)/(x+1)
+rho_z = Del_vir_z * Omz * rhoc_z
 #rho_z = 360 * rhoc_z
 
 # coma = pd.read_csv('Coma_props.csv')
@@ -45,7 +48,7 @@ t_dyn = (1 / np.sqrt(G * rho_z)).to(u.Gyr).value # in Gyr
 ## depletion timescale with redshift computation
 # taconni 18 expession: t_depl = (1+z)^-0.6 * del_MS^-0.44
 # for stellar mass range 9-11.8: del_MS ~ 10^-1.3 - 10^2.2
-t_depl_low_mass = ((1+z)**(-0.6)) * ((10**(-1.3))**(-0.44))
+t_depl_low_mass = ((1+z)**(-0.6)) * ((10**(0))**(-0.44))
 t_depl_high_mass = ((1+z)**(-0.6)) * ((10**(2.2))**(-0.44))  
 
 # # from Fig-5 Taconni 2018
