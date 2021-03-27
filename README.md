@@ -1,14 +1,14 @@
-# MSc_Astronomy Project
+# MSc Astronomy Project
 
 ## Star formation histories of Coma Cluster galaxies matched to simulated orbits hint at quenching around first pericenter
-### A.~K.~Upadhyay, K.~A.~Oman, S.~C.~Trager
+### A.K. Upadhyay, K.A. Oman, and S.C. Trager
 ---------------------------------------------------------------------------------------------------------------------------
 
 *All codes related to my masters research during 2019-2020 and further work during 2020-21 for publication in Astonomy and Astrophyscs (A&A) journal in 2021.*
 
-Code Author: **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)
-In collaboration with: **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen)
-                       **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)
+Code Author: **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)\
+In collaboration with: **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen)\ 
+$~~~~~~~~~~~~~~~~~~~~~~$**Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)
                        
 Codes: Python and Yorrick
 
