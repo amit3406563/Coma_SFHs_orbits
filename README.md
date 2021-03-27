@@ -4,14 +4,15 @@
 ### A.K. Upadhyay, K.A. Oman, and S.C. Trager
 ---------------------------------------------------------------------------------------------------------------------------
 
-*All codes related to my masters research during 2019-2020 and further work during 2020-21 for publication in Astonomy and Astrophyscs (A&A) journal in 2021.*
+*All codes related to my masters research during 2019-2020 and further work during 2020-21 for publication in A & A journal.*
 
 | <!-- -->               | <!-- -->                                                                                    |
 |------------------------|---------------------------------------------------------------------------------------------|
 | Code Author:           | **Amit Kumar Upadhyay** (Kapteyn Astronomical Institute, University of Groningen)           |
-| In collaboration with: | **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen) <br /> **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University) |
+| In collaboration with: | **Prof. Dr. Scott Trager** (Kapteyn Astronomical Institute, University of Groningen) <br /> 
+                           **Dr. Kyle Oman** (Department of Physics - Astronomy, Durham University)                    |
                        
-Codes: Python and Yorrick
+Programming Languages: **Python** and **Yorrick** <br />
 
 Description of code files:
 1_steckmap_plot.py: Reads (tables saved as *.dat), plots (plots saved as *.pdf) the STECKMAP output files containing SAD, MASS, SFR, AMR, LOSVD, and Spectra information for different SSPs, namely, MILES, BC03, and PHR.
