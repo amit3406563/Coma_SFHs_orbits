@@ -71,43 +71,43 @@ for name in res1.index:
                  xerr=[[res1.loc[name]['tinf-']],[res1.loc[name]['tinf+']]],
                  yerr=[[res1.loc[name]['%Ms_tinf-']/100],
                        [res1.loc[name]['%Ms_tinf+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc=c,
-                 markersize=8)
+                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc='w',
+                 markersize=16)
     # pericenter points - MILES
     ax1.errorbar(res1.loc[name]['tperi'],res1.loc[name]['%Ms_tperi']/100,
                  xerr=[[res1.loc[name]['tperi-']],[res1.loc[name]['tperi+']]],
                  yerr=[[res1.loc[name]['%Ms_tperi-']/100],
                        [res1.loc[name]['%Ms_tperi+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc=c,
-                 markersize=8)
+                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc='w',
+                 markersize=20)
     # infall points - BC03
     ax2.errorbar(res1b.loc[name]['tinf'],res1b.loc[name]['%Ms_tinf']/100,
                  xerr=[[res1b.loc[name]['tinf-']],[res1b.loc[name]['tinf+']]],
                  yerr=[[res1b.loc[name]['%Ms_tinf-']/100],
                        [res1b.loc[name]['%Ms_tinf+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc=c,
-                 markersize=8)
+                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc='w',
+                 markersize=16)
     # pericenter points - BC03
     ax2.errorbar(res1b.loc[name]['tperi'],res1b.loc[name]['%Ms_tperi']/100,
                  xerr=[[res1b.loc[name]['tperi-']],[res1b.loc[name]['tperi+']]],
                  yerr=[[res1b.loc[name]['%Ms_tperi-']/100],
                        [res1b.loc[name]['%Ms_tperi+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc=c,
-                 markersize=8)
+                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc='w',
+                 markersize=20)
     # infall points -PHR
     ax3.errorbar(res1p.loc[name]['tinf'],res1p.loc[name]['%Ms_tinf']/100,
                  xerr=[[res1p.loc[name]['tinf-']],[res1p.loc[name]['tinf+']]],
                  yerr=[[res1p.loc[name]['%Ms_tinf-']/100],
                        [res1p.loc[name]['%Ms_tinf+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc=c,
-                 markersize=8)
+                 elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc='w',
+                 markersize=16)
     # pericenter points - PHR
     ax3.errorbar(res1.loc[name]['tperi'],res1.loc[name]['%Ms_tperi']/100,
                  xerr=[[res1.loc[name]['tperi-']],[res1.loc[name]['tperi+']]],
                  yerr=[[res1.loc[name]['%Ms_tperi-']/100],
                        [res1.loc[name]['%Ms_tperi+']/100]],
                  elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc=c,
-                 markersize=8)
+                 markersize=20)
     # plot2 - MILES
     ax4.errorbar(res2.loc[name]['log_Ms'], res2.loc[name]['m_%Ms_ip'], 
                  yerr=[[res2.loc[name]['e-']],[res2.loc[name]['e+']]],
@@ -129,7 +129,7 @@ lin_reg_y, b, m = lin_reg(np.array(res2['log_Ms']),np.array(res2['m_%Ms_ip']),
                           lin_reg_x)
 b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
-ax4.plot(lin_reg_x,lin_reg_y,c='m',linestyle='-',linewidth=4)
+ax4.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - MILES
 ax4.set_ylim(-0.5,50.5)
 ax4.set_yticks(ax4.get_yticks()[1:-1]) # Remove first and last ticks
@@ -150,7 +150,7 @@ ax4.tick_params(axis='both',which='minor',direction='in', bottom = True,
 dia = mlines.Line2D([], [], color='k', marker='D', 
                     linestyle='None', markersize=8, 
                     label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')
-line = mlines.Line2D([], [], color='m', marker='None', linestyle='-',
+line = mlines.Line2D([], [], color='r', marker='None', linestyle='-',
                      markersize=8,linewidth=4, 
                      label=r'$y=$'+m+r'$\,\log(M_\star/\mathrm{M}_\odot)+\,$'+b)
 ax4.legend(handles=[dia,line],fontsize=13, loc=2, bbox_to_anchor=(0.02,0.98), 
@@ -163,7 +163,7 @@ lin_reg_y, b, m = lin_reg(np.array(res2b['log_Ms']),np.array(res2b['m_%Ms_ip']),
                           lin_reg_x)
 b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
-ax5.plot(lin_reg_x,lin_reg_y,c='m',linestyle='-',linewidth=4)
+ax5.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - BC03
 ax5.set_ylim(-0.5,50.5)
 ax5.set_yticks(ax5.get_yticks()[1:-1]) # Remove first and last ticks
@@ -185,7 +185,7 @@ ax5.tick_params(axis='both',which='minor',direction='in', bottom = True,
 dia = mlines.Line2D([], [], color='k', marker='D', 
                     linestyle='None', markersize=8, 
                     label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')
-line = mlines.Line2D([], [], color='m', marker='None', linestyle='-',
+line = mlines.Line2D([], [], color='r', marker='None', linestyle='-',
                      markersize=8,linewidth=4, 
                      label=r'$y=$'+m+r'$\,\log(M_\star/\mathrm{M}_\odot)+\,$'+b)
 ax5.legend(handles=[dia,line],fontsize=13, loc=2, bbox_to_anchor=(0.02,0.98), 
@@ -198,7 +198,7 @@ lin_reg_y, b, m = lin_reg(np.array(res2p['log_Ms']),np.array(res2p['m_%Ms_ip']),
                           lin_reg_x)
 b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
-ax6.plot(lin_reg_x,lin_reg_y,c='m',linestyle='-',linewidth=4)
+ax6.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - PHR
 ax6.set_ylim(-0.5,50.5)
 ax6.set_yticks(ax6.get_yticks()[1:-1]) # Remove first and last ticks
@@ -220,7 +220,7 @@ ax6.tick_params(axis='both',which='minor',direction='in', bottom = True,
 dia = mlines.Line2D([], [], color='k', marker='D', 
                     linestyle='None', markersize=8, 
                     label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')
-line = mlines.Line2D([], [], color='m', marker='None', linestyle='-',
+line = mlines.Line2D([], [], color='r', marker='None', linestyle='-',
                      markersize=8,linewidth=4, 
                      label=r'$y=$'+m+r'$\,\log(M_\star/\mathrm{M}_\odot)+\,$'+b)
 ax6.legend(handles=[dia,line],fontsize=13, loc=2, bbox_to_anchor=(0.02,0.98), 

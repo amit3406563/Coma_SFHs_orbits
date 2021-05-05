@@ -64,15 +64,15 @@ def plot_all(ssp):
                       xerr=[[res1.loc[name]['tinf-']],[res1.loc[name]['tinf+']]],
                       yerr=[[res1.loc[name]['%Ms_tinf-']/100],
                             [res1.loc[name]['%Ms_tinf+']/100]],
-                      elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc=c,
-                      markersize=8)
+                      elinewidth=1, capsize=5, ecolor=c, marker='o', mec=c, mfc='w',
+                      markersize=16)
         # pericenter points
         ax1.errorbar(res1.loc[name]['tperi'],res1.loc[name]['%Ms_tperi']/100,
                      xerr=[[res1.loc[name]['tperi-']],[res1.loc[name]['tperi+']]],
                      yerr=[[res1.loc[name]['%Ms_tperi-']/100],
                            [res1.loc[name]['%Ms_tperi+']/100]],
                      elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, 
-                     mfc=c, markersize=8)
+                     mfc='w', markersize=20)
         ## plot-2
         ax2.errorbar(res2.loc[name]['log_Ms'],res2.loc[name]['m_%Ms_ip'],
                      yerr=[[res2.loc[name]['e-']],[res2.loc[name]['e+']]],
@@ -85,7 +85,7 @@ def plot_all(ssp):
     lin_reg_y, b, m = lin_reg(xin,yin,lin_reg_x)
     b = '{:.2f}'.format(b)
     m = '{:.2f}'.format(m[0])
-    ax2.plot(lin_reg_x,lin_reg_y,c='m',linestyle='-',linewidth=4)
+    ax2.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
     # plot-1: settings
     ax1.set_ylim(0.50,1.05)
     ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
@@ -134,7 +134,7 @@ def plot_all(ssp):
     dia = mlines.Line2D([], [], color='k', marker='D', 
                         linestyle='None', markersize=8, 
                         label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')
-    line = mlines.Line2D([], [], color='m', marker='None', linestyle='-',
+    line = mlines.Line2D([], [], color='r', marker='None', linestyle='-',
                          markersize=8,linewidth=4, 
                          label=r'$y=$'+m+r'$\,\log(M_\star/\mathrm{M}_\odot)+\,$'+b)
     # ax.legend(handles=[dia,vline,line],frameon=False, framealpha=1.0,loc=2,

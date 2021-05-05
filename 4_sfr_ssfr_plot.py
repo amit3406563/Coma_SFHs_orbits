@@ -12,11 +12,12 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 from matplotlib.cm import ScalarMappable, viridis as cmap
 from matplotlib.colors import Normalize
+import matplotlib.lines as mlines
 from astropy.cosmology import Planck13, z_at_value
 #cosmo = FlatLambdaCDM(H0=67.77, Om0=0.3219) # Planck 2013 params
 import astropy.units as u
 # from scipy.signal import savgol_filter as sf
-# from scipy.interpolate import interp1d
+from scipy.interpolate import interp1d
 
 # linestyles
 linestyles = {
@@ -86,7 +87,22 @@ def z_at_given_lookback(lookback):
     age_of_universe = Planck13.age(0)
     ages = age_of_universe - lookback*u.Gyr
     z_lookback = [z_at_value(Planck13.age, age) for age in ages]
-    return z_lookback
+    return np.array(z_lookback)
+
+def lookback_at_z(z):
+    age_of_universe = Planck13.age(0)
+    lookback = [age_of_universe.value - Planck13.age(red).value for red in z]
+    return np.array(lookback)
+
+# computes cosmic SFR for a given z as per Madau+14
+def cosmic_sfr(z_arr):
+    csfr = np.array([])
+    for z in z_arr:
+        sfr_z = 0.015 * ((1+z)**2.7 / (1 + ((1+z)/2.9)**5.6))
+        csfr = np.append(csfr, sfr_z)
+        
+    return csfr
+
 
 def plots(ssp):
     table_dir = tab_dir(ssp)
@@ -102,32 +118,89 @@ def plots(ssp):
 
     ## SFR Plot
     fig, ax = plt.subplots(figsize=(8,6))
+    handles = []
     for name, ls in zip(gmp_names, lsty):
         if name == '3329':
             continue
         else:
             rel_s = rel_sfr(lookback, np.array(corr_sfr[name]))
             c = cmap(norm(log_Ms_df.loc[name]['log_Ms']))
-            ax.plot(lookback, rel_s, color=c, linestyle=ls, linewidth=3, 
-                    label='GMP '+name)
+            ax.plot(lookback, rel_s, color=c, linestyle=ls, linewidth=3)
+            line = mlines.Line2D([], [], color=c, marker='None', 
+                                 linestyle=ls, linewidth=3, 
+                                 label='GMP '+name)
+            handles.append(line)
 
-    xaxis_labels = np.arange(0.5,14.5,2.5)
-    z_x = z_at_given_lookback(xaxis_labels)
-    z_xaxis_labels = [round(val,2) for val in z_x]
+    ## plotting cosmic SFR from Madau+14
+    # zl = z_at_given_lookback(lookback)
+    # c_sfr = cosmic_sfr(zl)
+    
+    # ax3 = ax.twinx()
+    # ax3.plot(lookback, c_sfr, color='r', linestyle='-', linewidth=4)
+    
+    # madau_line = mlines.Line2D([], [], color='r', marker='None', linestyle='-', 
+    #                            linewidth=4, label='Madau+14')
+    
+    ## plotting exp SFR decay
+    sfr01 = np.exp(0.1*lookback)
+    sfr03 = np.exp(0.3*lookback)
+    #ax3 = ax.twinx()
+    ax.plot(lookback, sfr03/100, color='r', linestyle='-', linewidth=4)
+    ax.plot(lookback, sfr01/100, color='b', linestyle='-', linewidth=4)
+    
+    line01 = mlines.Line2D([], [], color='b', marker='None', linestyle='-', 
+                                linewidth=4, 
+                                label=r'$\tau=0.1\,\mathrm{Gyr}^{-1}$')
+    handles1 = []
+    
+    handles1.append(line01)
+    
+    line03 = mlines.Line2D([], [], color='r', marker='None', linestyle='-', 
+                                linewidth=4, 
+                                label=r'$\tau=0.3\,\mathrm{Gyr}^{-1}$')
+    
+    handles1.append(line03)
+    
+    
+    ## setting limits and axes lables
+    ax.set_xlim(0.,max(lookback))
+    xtks = [2., 4., 6., 8., 10., 12.]
+    ax.set_xticks(xtks)
+    ax.set_ylim(0.,0.65)
+    ytks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+    ax.set_yticks(ytks)
+    
+    #ax3.set_ylim(0.,0.14)
+    #ax3.set_yticks([0.02, 0.04, 0.06, 0.08, 0.10, 0.12])
+    
+    ## adding 'z' redshift axes
     ax2 = ax.twiny()
-    ax.set_xticks(xaxis_labels)
-    ax.set_xticklabels(xaxis_labels)
-    ax2.set_xlim(ax.get_xlim())
-    ax2.set_xticks(xaxis_labels)
-    ax2.set_xticklabels(z_xaxis_labels)
+    z = [0.2, 0.5, 1.0, 2.0, 7.0] # redshift values to be shown on axes
+    # corresponding lookback time
+    lookback_z = lookback_at_z(z)
+    # relative postions of x-axis ticks
+    x_min, x_max = ax.get_xlim()
+    xtks_pos = [(tick - x_min)/(x_max - x_min) for tick in ax.get_xticks()]
+    f = interp1d(xtks, xtks_pos, fill_value='extrapolate')
+    # relative positions of z 
+    ztks = f(lookback_z)
+    # set ax2 tick values
+    ax2.set_xticks(ztks)
+    ax2.set_xticklabels(z)
     
     ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
-    #ax.set_ylabel(r'SFR [${\rm M}_\odot yr^{-1}$]',fontsize=18)
     ax.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
     ax2.set_xlabel(r'$z$',fontsize=18)
+    #ax3.set_ylabel(r'SFR [$\mathrm{M}_\odot\,\mathrm{yr}^{-1}\,\mathrm{Mpc}^{-3}$]',fontsize=18)
+    #ax3.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]')
     
-    ax.legend(ncol=2, frameon=True, framealpha=1.0, edgecolor='k', fontsize=14, 
-              loc=2, bbox_to_anchor=(0.03,0.97), bbox_transform=ax.transAxes)
+    ax.legend(ncol=2, handles=handles, frameon=True, framealpha=1.0, 
+              edgecolor='k', fontsize=14, loc=2, bbox_to_anchor=(0.03,0.97), 
+              bbox_transform=ax.transAxes)
+    
+    ax2.legend(ncol=1, handles=handles1, frameon=True, framealpha=1.0, 
+              edgecolor='k', fontsize=14, loc=3, bbox_to_anchor=(0.03,0.32), 
+              bbox_transform=ax2.transAxes)
     
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
@@ -145,11 +218,19 @@ def plots(ssp):
     ax2.tick_params(axis='both',which='minor',direction='in', bottom = False, 
                    top = True, left = False, right = False,  length=5,
                    labelsize=18)
+    #ax3.xaxis.set_minor_locator(AutoMinorLocator())
+    #ax3.yaxis.set_minor_locator(AutoMinorLocator())
+    #ax3.tick_params(axis='both',which='major',direction='in', bottom = False, 
+    #               top = False, left = False, right = True,  length=10,
+    #               labelsize=18)
+    #ax3.tick_params(axis='both',which='minor',direction='in', bottom = False, 
+    #               top = False, left = False, right = True,  length=5,
+    #               labelsize=18)
     
     cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0], pad=0.01)
     cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=18)
     cbar.ax.tick_params(axis='y', direction='in',  length=10, labelsize=18)
-    #plt.savefig(table_dir+'sfr_plot.pdf',dpi=500)
+    plt.savefig(table_dir+'sfr_plot.pdf',dpi=500)
     
     
     ## SSFR Plot

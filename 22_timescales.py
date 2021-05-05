@@ -37,6 +37,9 @@ l5 = linestyles['solid']
 ## redshift array
 z = np.linspace(0.,1.8,19)
 
+### New tff tables
+tffs_df = pd.read_csv('new_tffs.dat', sep="\s+")
+
 ##############################################################################
 ## computing timescales -- 
 ## t_inf-peri: from 2.5r_vir (inf) to peri 
@@ -152,9 +155,13 @@ peri_z = np.array([z_at_value(Planck13.age, age) for age in peri_ages])
 c = 'k'
 fig, ax = plt.subplots(figsize=(8,7))
 # freefall time from r_vir to peri
-ax.plot(z, t_ff_z, c='k', linestyle=l1, linewidth=3) 
+# ax.plot(z, t_ff_z, c='k', linestyle=l1, linewidth=3) 
+ax.plot(tffs_df['#z'], tffs_df['tff_rvir/Gyr'], c='k', linestyle=l1, 
+        linewidth=3) 
 # freefall time from 2.5r_vir (inf) to peri
-ax.plot(z, t_ff_inf_peri_z, c='k', linestyle=l2, linewidth=3) 
+ax.plot(z, t_ff_inf_peri_z, c='k', linestyle=l2, linewidth=3)
+ax.plot(tffs_df['#z'], tffs_df['tff_2p5rvir/Gyr'], c='k', linestyle=l2, 
+        linewidth=3) 
 # dynamical timescale
 #ax.plot(z, t_dyn_z, c='k', linestyle=l5, linewidth=3) 
 # gas depletion timescale for del_Ms = 10^0

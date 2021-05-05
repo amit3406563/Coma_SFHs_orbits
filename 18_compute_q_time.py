@@ -16,7 +16,8 @@ gmp = df['GMP'].tolist()
 
 ssfr_avg = 10**(-11) # yr^-1
 
-sfr_mw = 0.68 # M_solar yr^-1
+ssfr_mw = 0.3 * 10**(-9) # yr^-1
+#sfr_mw = 0.68 # M_solar yr^-1
 
 
 def comp_tq_ssfr_avg(ms_perc):
@@ -27,6 +28,7 @@ def comp_tq_ssfr_avg(ms_perc):
 def comp_tq_sfr_mw(log_ms,ms_perc):
     ms_left = 1 - ms_perc/100
     ms = 10**log_ms * ms_left
+    sfr_mw = 10**log_ms * ssfr_mw
     tq = (ms / sfr_mw) / 10**9
     return tq
 
@@ -56,6 +58,8 @@ df_new['tq_sfr_mw'] = tq_sfr_mw
 df_new['tq_sfr_mw-'] = tq_sfr_mw_m
 
 df_new.iloc[:,1:] = df_new.iloc[:,1:].round(decimals=2)
+
+print(df_new)
 
 fig, ax = plt.subplots(figsize=(4,4))
     #ax.axis('tight')

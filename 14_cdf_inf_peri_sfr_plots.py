@@ -145,7 +145,10 @@ def plotting(time_bool, t_inf, t_peri, sfr, i_frac, name):
     #             fontsize=16)
     ax.set_xticks(np.linspace(np.floor(min(timebins)), 
                               np.ceil(max(timebins)),8))
+    ax.set_ylim(0.,1.)
     ax.set_yticks([0.,0.16,0.5,0.84,1.])
+    ax.set_xlim(0.,ageU)
+    ax.set_xticks([2.,4.,6.,8.,10.,12.])
     ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
     if time_bool == 'inf':
         ax.set_ylabel(r'$t_\mathrm{inf}$ CDF ; Cumulative SFH', fontsize=18)

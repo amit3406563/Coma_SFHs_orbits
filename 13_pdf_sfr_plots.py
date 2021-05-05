@@ -19,8 +19,8 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 ageU = Planck13.age(0).value # age of the Universe as per Planck 13 cosmology
 
-# gmp_names = ['3254','3269', '3291', '3352', '3367', '3414', '3484',
-#               '3534', '3565', '3639', '3664']
+#gmp_names = ['3254','3269', '3291', '3352', '3367', '3414', '3484',
+#             '3534', '3565', '3639', '3664']
 
 gmp_names = ['3254']
 
@@ -70,7 +70,12 @@ def plotting(time_bool,t_inf,t_peri,sfr,name):
     ax.axvline(x=med, c='k', linestyle='--')
     ax1 = ax.twinx()
     ax1.plot(b, s_r, c='tab:red', linestyle='-', marker='s', markersize=10)
-
+    ax.set_xlim(0.,ageU)
+    ax.set_xticks([2.,4.,6.,8.,10.,12.])
+    ax.set_ylim(0.,0.25)
+    ax.set_yticks([0.,0.05,0.10,0.15,0.20,0.25])
+    ax1.set_ylim(0.,0.25)
+    ax1.set_yticks([0.,0.05,0.10,0.15,0.20,0.25])
     ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
     if time_bool == 'inf':
         ax.set_ylabel('Infall PDF (normalized)',fontsize=18)
@@ -133,10 +138,10 @@ def plots(ssp,ext):
         pdf.savefig(fig,dpi=500)
     pdf.close()
 
-uncert_ext = ['Rvir_Ms','Rvir_Ms+','Rvir_Ms-','Rvir+_Ms','Rvir-_Ms']
-ssps = ['miles','bc03','phr']
-# ssps = ['miles']
-# uncert_ext = ['Rvir_Ms']
+# uncert_ext = ['Rvir_Ms','Rvir_Ms+','Rvir_Ms-','Rvir+_Ms','Rvir-_Ms']
+# ssps = ['miles','bc03','phr']
+ssps = ['miles']
+uncert_ext = ['Rvir_Ms']
 for ssp in ssps:
     for ext in uncert_ext:
         plots(ssp,ext)    

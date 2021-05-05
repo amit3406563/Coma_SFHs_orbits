@@ -31,15 +31,21 @@ smap.set_array([])
 
 fig, ax = plt.subplots(figsize=(10,7))
 for name, log_Mi, ri, vi in zip(sat_names, log_Mh, r, v):
-    c = cmap(norm(log_Mi))
-    ax.plot(ri, vi, 's', markersize=12, color=c)
-    ax.annotate(name, (ri, vi), xytext=(-26, 9), textcoords='offset points',
-                color='k', fontsize=14)
-ax.set_xlim(-0.005,0.055)
-ax.set_ylim(-0.1,1.3)
-xticks = ax.xaxis.get_major_ticks()
-xticks[0].label1.set_visible(False)
-xticks[-1].label1.set_visible(False)
+    if name == '3329':
+        continue
+    else:
+        c = cmap(norm(log_Mi))
+        ax.plot(ri, vi, 's', markersize=16, color=c)
+        ax.annotate(name, (ri, vi), xytext=(-26, 9), 
+                    textcoords='offset points', color='k', fontsize=14)
+
+ax.set_xlim(0.,0.055)
+ax.set_ylim(0.,1.3)
+ax.set_xticks([0.01, 0.02, 0.03, 0.04, 0.05])
+ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0, 1.2])
+# xticks = ax.xaxis.get_major_ticks()
+# xticks[0].label1.set_visible(False)
+# xticks[-1].label1.set_visible(False)
 ax.set_ylabel(r'$V/\sigma_{3D}$',fontsize=18)
 ax.set_xlabel(r'$R/r_{vir}$',fontsize=18)
 ax.xaxis.set_minor_locator(AutoMinorLocator())
