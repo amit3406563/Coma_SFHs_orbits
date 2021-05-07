@@ -153,13 +153,13 @@ peri_z = np.array([z_at_value(Planck13.age, age) for age in peri_ages])
 ##############################################################################
 ## Plotting
 c = 'k'
-fig, ax = plt.subplots(figsize=(8,7))
+fig, ax = plt.subplots(figsize=(9,8))
 # freefall time from r_vir to peri
 # ax.plot(z, t_ff_z, c='k', linestyle=l1, linewidth=3) 
 ax.plot(tffs_df['#z'], tffs_df['tff_rvir/Gyr'], c='k', linestyle=l1, 
         linewidth=3) 
 # freefall time from 2.5r_vir (inf) to peri
-ax.plot(z, t_ff_inf_peri_z, c='k', linestyle=l2, linewidth=3)
+# ax.plot(z, t_ff_inf_peri_z, c='k', linestyle=l2, linewidth=3)
 ax.plot(tffs_df['#z'], tffs_df['tff_2p5rvir/Gyr'], c='k', linestyle=l2, 
         linewidth=3) 
 # dynamical timescale
@@ -171,24 +171,24 @@ ax.plot(z, t_depl_z1, c='k', linestyle=l3, linewidth=3)
 ## quenching timescales from low and high z studies
 # Foltz 18
 ax.errorbar(z1_f18, tq1_f18, yerr=tqe1_f18, elinewidth=1, capsize=5, 
-            ecolor=c, marker='o', mec=c, mfc=c, markersize=10)
+            ecolor=c, marker='o', mec=c, mfc=c, markersize=17)
 ax.errorbar(z2_f18, tq2_f18, yerr=tqe2_f18, elinewidth=1, capsize=5, 
-            ecolor=c, marker='o', mec=c, mfc=c, markersize=10)
+            ecolor=c, marker='o', mec=c, mfc=c, markersize=17)
 # Muzzin 14
 ax.errorbar(z_m14, tq_m14, yerr=tqe_m14, elinewidth=1, capsize=5, 
-            ecolor=c, marker='D', mec=c, mfc=c, markersize=8)
+            ecolor=c, marker='D', mec=c, mfc=c, markersize=15)
 # Haines 15
 ax.errorbar(z_h15, tq_h15, yerr=tqe_h15, elinewidth=1, capsize=5, 
-            ecolor=c, marker='s', mec=c, mfc=c, markersize=9)
+            ecolor=c, marker='s', mec=c, mfc=c, markersize=16)
 # Balogh 16
 ax.errorbar(z_b16, tq_b16, yerr=tqe_b16, elinewidth=1, capsize=5, 
-            ecolor=c, marker='*', mec=c, mfc=c, markersize=10)
+            ecolor=c, marker='*', mec=c, mfc=c, markersize=17)
 # Wetzel 13
 ax.errorbar(z_w13, tq_w13, yerr=tqe_w13, elinewidth=1, capsize=5, 
-            ecolor=c, marker='P', mec=c, mfc=c, markersize=10)
+            ecolor=c, marker='P', mec=c, mfc=c, markersize=17)
 # Taranu 14
 ax.errorbar(z_t14, tq_t14, yerr=tqe_t14, elinewidth=1, capsize=5, 
-            ecolor=c, marker='X', mec=c, mfc=c, markersize=10)
+            ecolor=c, marker='X', mec=c, mfc=c, markersize=17)
 # rug plot 
 height_val = ax.get_ylim()[1]/18
 _, ymax = ax.get_ybound()
@@ -197,10 +197,14 @@ for x in inf_z:
 for x in peri_z:
     ax.axvline(x, ymax=height_val/ymax, linewidth=2, color='k')
 # plot settings
-ax.set_ylim(-0.1,7.1)
-ax.set_yticks(ax.get_yticks()[1:-1]) # Remove first and last ticks
-ax.set_xlim(-0.02,1.62)
-ax.set_xticks(ax.get_xticks()[1:-1]) # Remove first and last ticks
+ax.set_ylim(0.,6.)
+ax.set_yticks([0.,1.,2.,3.,4.,5.,6.])
+ax.set_xlim(0.,1.6)
+ax.set_xticks([0.2,0.4,0.6,0.8,1.0,1.2,1.4])
+# ax.set_ylim(-0.1,7.1)
+# ax.set_yticks(ax.get_yticks()[1:-1]) # Remove first and last ticks
+# ax.set_xlim(-0.02,1.62)
+# ax.set_xticks(ax.get_xticks()[1:-1]) # Remove first and last ticks
 ax.set_xlabel(r'$z$', fontsize=18)
 ax.set_ylabel(r'$t \, \mathrm{[Gyr]}$', fontsize=18)
 ax.xaxis.set_minor_locator(AutoMinorLocator())

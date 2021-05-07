@@ -117,7 +117,7 @@ def plots(ssp):
     
 
     ## SFR Plot
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(11,8))
     handles = []
     for name, ls in zip(gmp_names, lsty):
         if name == '3329':
@@ -142,21 +142,23 @@ def plots(ssp):
     #                            linewidth=4, label='Madau+14')
     
     ## plotting exp SFR decay
-    sfr01 = np.exp(0.1*lookback)
-    sfr03 = np.exp(0.3*lookback)
-    #ax3 = ax.twinx()
-    ax.plot(lookback, sfr03/100, color='r', linestyle='-', linewidth=4)
-    ax.plot(lookback, sfr01/100, color='b', linestyle='-', linewidth=4)
+    # ageU = Planck13.age(0).value
+    lb = np.linspace(0.,lookback[-1],138)
+    sfr01 = np.exp(0.1*lb) * (1/np.exp(0.1*lb[-1]))
+    sfr03 = np.exp(0.3*lb) * (1/np.exp(0.3*lb[-1]))
+    ax3 = ax.twinx()
+    ax3.plot(lb, sfr03, color='r', linestyle='-', linewidth=1)
+    ax3.plot(lb, sfr01, color='b', linestyle='-', linewidth=1)
     
     line01 = mlines.Line2D([], [], color='b', marker='None', linestyle='-', 
-                                linewidth=4, 
+                                linewidth=1, 
                                 label=r'$\tau=0.1\,\mathrm{Gyr}^{-1}$')
     handles1 = []
     
     handles1.append(line01)
     
     line03 = mlines.Line2D([], [], color='r', marker='None', linestyle='-', 
-                                linewidth=4, 
+                                linewidth=1, 
                                 label=r'$\tau=0.3\,\mathrm{Gyr}^{-1}$')
     
     handles1.append(line03)
@@ -166,12 +168,12 @@ def plots(ssp):
     ax.set_xlim(0.,max(lookback))
     xtks = [2., 4., 6., 8., 10., 12.]
     ax.set_xticks(xtks)
-    ax.set_ylim(0.,0.65)
-    ytks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+    ax.set_ylim(0.,0.45)
+    ytks = [0., 0.1, 0.2, 0.3, 0.4]
     ax.set_yticks(ytks)
     
-    #ax3.set_ylim(0.,0.14)
-    #ax3.set_yticks([0.02, 0.04, 0.06, 0.08, 0.10, 0.12])
+    ax3.set_ylim(0.,1.0)
+    ax3.set_yticks([0., 0.2, 0.4, 0.6, 0.8, 1.0])
     
     ## adding 'z' redshift axes
     ax2 = ax.twiny()
@@ -192,23 +194,24 @@ def plots(ssp):
     ax.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
     ax2.set_xlabel(r'$z$',fontsize=18)
     #ax3.set_ylabel(r'SFR [$\mathrm{M}_\odot\,\mathrm{yr}^{-1}\,\mathrm{Mpc}^{-3}$]',fontsize=18)
-    #ax3.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]')
+    #ax3.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
+    ax3.set_ylabel('Fraction of stars formed in the time interval',fontsize=18)
     
     ax.legend(ncol=2, handles=handles, frameon=True, framealpha=1.0, 
               edgecolor='k', fontsize=14, loc=2, bbox_to_anchor=(0.03,0.97), 
               bbox_transform=ax.transAxes)
     
     ax2.legend(ncol=1, handles=handles1, frameon=True, framealpha=1.0, 
-              edgecolor='k', fontsize=14, loc=3, bbox_to_anchor=(0.03,0.32), 
+              edgecolor='k', fontsize=14, loc=3, bbox_to_anchor=(0.03,0.45), 
               bbox_transform=ax2.transAxes)
     
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())
     ax.tick_params(axis='both',which='major',direction='in', bottom = True, 
-                   top = False, left = True, right = True,  length=10,
+                   top = False, left = True, right = False,  length=10,
                    labelsize=18)
     ax.tick_params(axis='both',which='minor',direction='in', bottom = True, 
-                   top = False, left = True, right = True,  length=5,
+                   top = False, left = True, right = False,  length=5,
                    labelsize=18)
     ax2.xaxis.set_minor_locator(AutoMinorLocator())
     ax2.yaxis.set_minor_locator(AutoMinorLocator())
@@ -218,16 +221,16 @@ def plots(ssp):
     ax2.tick_params(axis='both',which='minor',direction='in', bottom = False, 
                    top = True, left = False, right = False,  length=5,
                    labelsize=18)
-    #ax3.xaxis.set_minor_locator(AutoMinorLocator())
-    #ax3.yaxis.set_minor_locator(AutoMinorLocator())
-    #ax3.tick_params(axis='both',which='major',direction='in', bottom = False, 
-    #               top = False, left = False, right = True,  length=10,
-    #               labelsize=18)
-    #ax3.tick_params(axis='both',which='minor',direction='in', bottom = False, 
-    #               top = False, left = False, right = True,  length=5,
-    #               labelsize=18)
+    # ax3.xaxis.set_minor_locator(AutoMinorLocator())
+    ax3.yaxis.set_minor_locator(AutoMinorLocator())
+    ax3.tick_params(axis='y',which='major',direction='in', bottom = False, 
+                    top = False, left = False, right = True,  length=10,
+                    labelsize=18)
+    ax3.tick_params(axis='y',which='minor',direction='in', bottom = False, 
+                    top = False, left = False, right = True,  length=5,
+                    labelsize=18)
     
-    cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0], pad=0.01)
+    cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0], pad=0.10)
     cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=18)
     cbar.ax.tick_params(axis='y', direction='in',  length=10, labelsize=18)
     plt.savefig(table_dir+'sfr_plot.pdf',dpi=500)
