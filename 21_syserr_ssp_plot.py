@@ -59,7 +59,7 @@ norm = Normalize(vmin=9, vmax=11)
 smap = ScalarMappable(cmap=cmap, norm=norm)
 smap.set_array([])
 # plot
-fig, ((ax1, ax2,  ax3),(ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(18,11))
+fig, ((ax1, ax2,  ax3),(ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(19,12))
 gs1 = gridspec.GridSpec(2, 3)
 gs1.update(wspace=0.025, hspace=0.05)
 for name in res1.index:
@@ -106,7 +106,7 @@ for name in res1.index:
                  xerr=[[res1.loc[name]['tperi-']],[res1.loc[name]['tperi+']]],
                  yerr=[[res1.loc[name]['%Ms_tperi-']/100],
                        [res1.loc[name]['%Ms_tperi+']/100]],
-                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc=c,
+                 elinewidth=1, capsize=5, ecolor=c, marker='*', mec=c, mfc='w',
                  markersize=20)
     # plot2 - MILES
     ax4.errorbar(res2.loc[name]['log_Ms'], res2.loc[name]['m_%Ms_ip'], 
@@ -131,14 +131,16 @@ b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
 ax4.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - MILES
-ax4.set_ylim(-0.5,50.5)
-ax4.set_yticks(ax4.get_yticks()[1:-1]) # Remove first and last ticks
-ax4.set_xlim(8.8,11.2)
-ax4.set_xticks(ax4.get_xticks()[1:-1]) # Remove first and last ticks
+ax4.set_ylim(0.,50.)
+ax4.set_yticks([0.,10.,20.,30.,40.,50.])
+#ax4.set_yticks(ax4.get_yticks()[1:-1]) # Remove first and last ticks
+ax4.set_xlim(9.,11.)
+ax4.set_xticks([9.5,10.0,10.5])
+#ax4.set_xticks(ax4.get_xticks()[1:-1]) # Remove first and last ticks
 #ax4.set_xlabel(r'$\log_{\rm 10}M_\star/{\rm M}_\odot$',
 #                  fontsize=18)
 ax4.set_ylabel(r'Fractional $M_\star$ increase from $t_\mathrm{inf}$ to $t_\mathrm{peri}$',
-                      fontsize=18)
+                      fontsize=20)
 ax4.xaxis.set_minor_locator(AutoMinorLocator())
 ax4.yaxis.set_minor_locator(AutoMinorLocator())
 ax4.tick_params(axis='both',which='major',direction='in', bottom = True, 
@@ -165,13 +167,14 @@ b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
 ax5.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - BC03
-ax5.set_ylim(-0.5,50.5)
-ax5.set_yticks(ax5.get_yticks()[1:-1]) # Remove first and last ticks
+ax5.set_ylim(0.,50.)
+#ax5.set_yticks(ax5.get_yticks()[1:-1]) # Remove first and last ticks
 ax5.set_yticklabels([])
-ax5.set_xlim(8.8,11.2)
-ax5.set_xticks(ax5.get_xticks()[1:-1]) # Remove first and last ticks
+ax5.set_xlim(9.,11.)
+ax5.set_xticks([9.5,10.0,10.5])
+#ax5.set_xticks(ax5.get_xticks()[1:-1]) # Remove first and last ticks
 ax5.set_xlabel(r'$\log(M_\star/\mathrm{M}_\odot)$',
-                      fontsize=18)
+                      fontsize=20)
 #ax5.set_ylabel(r'${\Delta M_\star}_{{\rm inf}-{\rm peri}}/M_\star$ %',
 #                  fontsize=18)
 ax5.xaxis.set_minor_locator(AutoMinorLocator())
@@ -200,11 +203,12 @@ b = '{:.2f}'.format(b)
 m = '{:.2f}'.format(m[0])
 ax6.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
 # plot2- settings - PHR
-ax6.set_ylim(-0.5,50.5)
-ax6.set_yticks(ax6.get_yticks()[1:-1]) # Remove first and last ticks
+ax6.set_ylim(0.,50.)
+#ax6.set_yticks(ax6.get_yticks()[1:-1]) # Remove first and last ticks
 ax6.set_yticklabels([])
-ax6.set_xlim(8.8,11.2)
-ax6.set_xticks(ax6.get_xticks()[1:-1]) # Remove first and last ticks
+ax6.set_xlim(9.,11.)
+ax6.set_xticks([9.5,10.0,10.5])
+#ax6.set_xticks(ax6.get_xticks()[1:-1]) # Remove first and last ticks
 #ax6.set_xlabel(r'$\log_{\rm 10}M_\star/{\rm M}_\odot$',
 #                  fontsize=18)
 #ax6.set_ylabel(r'${\Delta M_\star}_{{\rm inf}-{\rm peri}}/M_\star$ %',
@@ -213,10 +217,10 @@ ax6.xaxis.set_minor_locator(AutoMinorLocator())
 ax6.yaxis.set_minor_locator(AutoMinorLocator())
 ax6.tick_params(axis='both',which='major',direction='in', bottom = True, 
                             top = True,left = True, right = True, length=10, 
-                            labelsize=18)
+                            pad=15, labelsize=18)
 ax6.tick_params(axis='both',which='minor',direction='in', bottom = True, 
                    top = True, left = True, right = True,  length=5,
-                   labelsize=18)
+                   pad=15, labelsize=18)
 dia = mlines.Line2D([], [], color='k', marker='D', 
                     linestyle='None', markersize=8, 
                     label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')
@@ -228,10 +232,12 @@ ax6.legend(handles=[dia,line],fontsize=13, loc=2, bbox_to_anchor=(0.02,0.98),
 ax6.grid(False)
 ax6.set_facecolor('w')
 # plot settings - MILES
-ax1.set_ylim(0.20,1.05)
-ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
+ax1.set_ylim(0.28,1.04)
+ax1.set_yticks([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0])
+#ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
 ax1.set_xlim(-1,11.0)
-ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
+ax1.set_xticks([0.,2.,4.,6.,8.,10.])
+ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=20)
 #ax1.set_xlabel('Lookback time [Gyr]',fontsize=18)
 ax1.xaxis.set_minor_locator(AutoMinorLocator())
 ax1.yaxis.set_minor_locator(AutoMinorLocator())
@@ -251,13 +257,14 @@ ax1.legend(handles=[circ, star],frameon=True, framealpha=0.7,
 ax1.grid(False)
 ax1.set_facecolor('w')
 # plot settings - BC03
-ax2.set_ylim(0.20,1.05)
-ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
+ax2.set_ylim(0.28,1.04)
+#ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
 #ax2.set_yticklabels([])
 ax2.set_yticklabels([])
 ax2.set_xlim(-1,11.0)
+ax2.set_xticks([0.,2.,4.,6.,8.,10.])
 #ax2.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
-ax2.set_xlabel('Lookback time [Gyr]',fontsize=18)
+ax2.set_xlabel('Lookback time [Gyr]',fontsize=20)
 ax2.xaxis.set_minor_locator(AutoMinorLocator())
 ax2.yaxis.set_minor_locator(AutoMinorLocator())
 ax2.tick_params(axis='both',which='major',direction='in', bottom = True, 
@@ -276,12 +283,13 @@ ax2.legend(handles=[circ, star],frameon=True, framealpha=0.7,
 ax2.grid(False)
 ax2.set_facecolor('w')
 # plot settings - PHR
-ax3.set_ylim(0.20,1.05)
+ax3.set_ylim(0.28,1.04)
 #ax3.set_xticklabels([0.,2.5,5.0,7.5,10.])
-ax3.set_yticks(ax3.get_yticks()[1:-1]) # Remove first and last ticks
+#ax3.set_yticks(ax3.get_yticks()[1:-1]) # Remove first and last ticks
 #ax3.set_yticklabels([])
 ax3.set_yticklabels([])
 ax3.set_xlim(-1,11.0)
+ax3.set_xticks([0.,2.,4.,6.,8.,10.])
 #ax3.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
 #ax3.set_xlabel('Lookback time [Gyr]',fontsize=18)
 ax3.xaxis.set_minor_locator(AutoMinorLocator())
@@ -302,14 +310,14 @@ ax3.legend(handles=[circ, star],frameon=True, framealpha=0.7,
 cbar_divider3 = make_axes_locatable(ax3)
 cbar_ax3 = cbar_divider3.append_axes('right', size='5%', pad=0.05)
 cbar3 = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0],cax=cbar_ax3)
-cbar3.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=18)
+cbar3.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=20)
 cbar_ax3.tick_params(axis='y', direction='in',labelsize=18)
 ax3.grid(False)
 ax3.set_facecolor('w')
 # titles
-ax1.set_title('MILES', fontsize=18, color = 'k')
-ax2.set_title('BC03', fontsize=18, color = 'k')
-ax3.set_title('PHR', fontsize=18, color = 'k')
+ax1.set_title('MILES', fontsize=20, color = 'k')
+ax2.set_title('BC03', fontsize=20, color = 'k')
+ax3.set_title('PHR', fontsize=20, color = 'k')
 # fig setting
 fig.tight_layout()
 # saving fig

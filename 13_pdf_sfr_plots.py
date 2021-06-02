@@ -76,12 +76,12 @@ def plotting(time_bool,t_inf,t_peri,sfr,name):
     ax.set_yticks([0.,0.05,0.10,0.15,0.20,0.25])
     ax1.set_ylim(0.,0.25)
     ax1.set_yticks([0.,0.05,0.10,0.15,0.20,0.25])
-    ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
+    ax.set_xlabel('Lookback time [Gyr]',fontsize=20)
     if time_bool == 'inf':
-        ax.set_ylabel('Infall PDF (normalized)',fontsize=18)
+        ax.set_ylabel('Infall PDF (normalized)',fontsize=20)
     else:
-        ax.set_ylabel('Pericenter PDF (normalized)',fontsize=18)
-    ax1.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
+        ax.set_ylabel('Pericenter PDF (normalized)',fontsize=20)
+    ax1.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=20)
     if time_bool == 'inf':
         bar_line = mlines.Line2D([], [], color='tab:gray', marker='None', 
                                  linestyle='-', linewidth=10, 

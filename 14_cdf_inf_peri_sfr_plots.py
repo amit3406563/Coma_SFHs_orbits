@@ -149,13 +149,13 @@ def plotting(time_bool, t_inf, t_peri, sfr, i_frac, name):
     ax.set_yticks([0.,0.16,0.5,0.84,1.])
     ax.set_xlim(0.,ageU)
     ax.set_xticks([2.,4.,6.,8.,10.,12.])
-    ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
+    ax.set_xlabel('Lookback time [Gyr]',fontsize=20)
     if time_bool == 'inf':
-        ax.set_ylabel(r'$t_\mathrm{inf}$ CDF ; Cumulative SFH', fontsize=18)
+        ax.set_ylabel(r'$t_\mathrm{inf}$ CDF ; Cumulative SFH', fontsize=20)
         line2 = mlines.Line2D([], [], color='k', marker='None', linestyle='-', 
                               label=r'$t_{\mathrm{inf}}$ CDF')
     else:
-        ax.set_ylabel(r'$t_\mathrm{peri}$ CDF ; Cumulative SFH', fontsize=18)
+        ax.set_ylabel(r'$t_\mathrm{peri}$ CDF ; Cumulative SFH', fontsize=20)
         line2 = mlines.Line2D([], [], color='k', marker='None', linestyle='-', 
                               label=r'$t_{\mathrm{peri}}$ CDF')
     line1 = mlines.Line2D([], [], color='r', marker='None', linestyle='-', 
@@ -202,10 +202,10 @@ def plots(ssp,ext):
         pdf.savefig(fig,dpi=500)
     pdf.close()
     
-uncert_ext = ['Rvir_Ms','Rvir_Ms+','Rvir_Ms-','Rvir+_Ms','Rvir-_Ms']
-ssps = ['miles','bc03','phr']
-# ssps = ['miles']
-# uncert_ext = ['Rvir_Ms']
+#uncert_ext = ['Rvir_Ms','Rvir_Ms+','Rvir_Ms-','Rvir+_Ms','Rvir-_Ms']
+#ssps = ['miles','bc03','phr']
+ssps = ['miles']
+uncert_ext = ['Rvir_Ms']
 for ssp in ssps:
     for ext in uncert_ext:
         plots(ssp,ext)

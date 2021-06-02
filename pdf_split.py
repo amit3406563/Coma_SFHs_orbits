@@ -70,7 +70,8 @@ def error_bars(time_bins,time_cdf,sfr_bins,sfr_cdf):
 ## reading 3254 infall time and splitting
 tinf = np.sort(np.array(pd.read_csv('./inf_peri_files/Rvir_Ms_inf_time.csv')['3254'].dropna()))
 ## median of infall
-inf_med_idx = np.where(tinf > np.median(tinf))[0][0]
+# inf_med_idx = np.where(tinf > np.median(tinf))[0][0]
+inf_med_idx = np.where(tinf > 5.5)[0][0]
 ## split about median
 tinf1 = tinf[0:inf_med_idx]
 tinf2 = tinf[inf_med_idx:]
@@ -78,7 +79,8 @@ tinf2 = tinf[inf_med_idx:]
 ## reading 3254 pericenter time and splitting
 tperi = np.sort(np.array(pd.read_csv('./inf_peri_files/Rvir_Ms_peri_time.csv')['3254'].dropna()))
 ## median of infall
-peri_med_idx = np.where(tperi > np.median(tperi))[0][0]
+# peri_med_idx = np.where(tperi > np.median(tperi))[0][0]
+peri_med_idx = np.where(tperi > 1.5)[0][0]
 ## split about median
 tperi1 = tperi[0:peri_med_idx]
 tperi2 = tperi[peri_med_idx:]
@@ -98,6 +100,9 @@ smap.set_array([])
 fig, ax = plt.subplots(figsize=(10,7))
 
 be = np.linspace(0.,ageU,20)
+be_peri = np.linspace(min(tperi), ageU, 20)
+be_peri1 = np.linspace(min(tperi1), ageU, 20)
+be_peri2 = np.linspace(min(tperi2), ageU, 20)
 a = sfr_df['Age_Gyr'] 
 s = sfr_df['3254']
 f = interp1d(a, s, fill_value='extrapolate') 
@@ -120,13 +125,13 @@ f50i2,g50i2,f84i2,g84i2,f16i2,g16i2,xerri2,yerri2 = error_bars(timebinsinf2,
                                                                tinfcdf2, 
                                                                sfrbins, mcdf)
 
-timebinsperi, tpericdf = cdf_time(be, tperi, int_frac)
+timebinsperi, tpericdf = cdf_time(be_peri, tperi, int_frac)
 f50p,g50p,f84p,g84p,f16p,g16p,xerrp,yerrp = error_bars(timebinsperi, 
                                                                tpericdf, 
                                                                sfrbins, mcdf)
 
-timebinsperi1, tpericdf1 = cdf_time(be, tperi1, int_frac)
-timebinsperi2, tpericdf2 = cdf_time(be, tperi2, int_frac)
+timebinsperi1, tpericdf1 = cdf_time(be_peri1, tperi1, int_frac)
+timebinsperi2, tpericdf2 = cdf_time(be_peri2, tperi2, int_frac)
 f50p1,g50p1,f84p1,g84p1,f16p1,g16p1,xerrp1,yerrp1 = error_bars(timebinsperi1, 
                                                                tpericdf1, 
                                                                sfrbins, mcdf)
@@ -154,9 +159,10 @@ ax.errorbar(f50p1, g50p1, xerr=xerrp1, yerr=yerrp1, elinewidth=1, capsize=5,
 ax.errorbar(f50p2, g50p2, xerr=xerrp2, yerr=yerrp2, elinewidth=1, capsize=5, 
             ecolor=c2, marker='*', mec=c2, mfc='w', markersize=20)
 
-ax.set_ylim(0.50,1.05)
-ax.set_yticks(ax.get_yticks()[1:-1]) # Remove first and last ticks
-ax.set_xlim(-1,11.0)
+ax.set_ylim(0.55,1.05)
+#ax.set_yticks(ax.get_yticks()[1:-1]) # Remove first and last ticks
+ax.set_yticks([0.6, 0.7, 0.8, 0.9, 1.0])
+ax.set_xlim(-3.,10.0)
 ax.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
 ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
 ax.xaxis.set_minor_locator(AutoMinorLocator())
@@ -166,17 +172,23 @@ ax.tick_params(axis='both',which='major',direction='in', bottom = True,
 ax.tick_params(axis='both',which='minor',direction='in', bottom = True, 
                top = True,left = True, right = True, length=5, labelsize=18)
 t = mlines.Line2D([], [], color=c, marker='o', linestyle='None',
-                              markersize=8, label='Infall')
-t1 = mlines.Line2D([], [], color=c1, marker='o', linestyle='None',
-                              markersize=8, label='Infall (later peak)') 
-t2 = mlines.Line2D([], [], color=c2, marker='o', linestyle='None',
-                              markersize=10, label='Infall (earlier peak)')
+                              mec=c, mfc='w', markersize=16, 
+                              label='Infall')
 p = mlines.Line2D([], [], color=c, marker='*', linestyle='None',
-                              markersize=8, label='Pericenter')
+                              mec=c, mfc='w', markersize=20, 
+                              label='Pericenter')
+t1 = mlines.Line2D([], [], color=c1, marker='o', linestyle='None',
+                              mec=c1, mfc='w', markersize=16, 
+                              label='Infall (later peak)') 
+t2 = mlines.Line2D([], [], color=c2, marker='o', linestyle='None',
+                              mec=c2, mfc='w', markersize=16, 
+                              label='Infall (earlier peak)')
 p1 = mlines.Line2D([], [], color=c1, marker='*', linestyle='None',
-                              markersize=8, label='Pericenter (later peak)') 
+                              mec=c1, mfc='w', markersize=20, 
+                              label='Pericenter (later peak)') 
 p2 = mlines.Line2D([], [], color=c2, marker='*', linestyle='None',
-                              markersize=10, label='Pericenter (earlier peak)')
+                              mec=c2, mfc='w', markersize=20, 
+                              label='Pericenter (earlier peak)')
 ax.legend(handles=[t, p, t1, p1, t2, p2],fontsize=15, loc=3, 
           bbox_to_anchor=(0.02,0.02), bbox_transform=ax.transAxes) 
 cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0])
@@ -184,4 +196,6 @@ cbar.set_label(r'$\log_{10}(M_\star/{\rm M}_\odot)$',fontsize=18)
 cbar.ax.tick_params(axis='y', direction='in',labelsize=18)
 ax.grid(False)
 ax.set_facecolor('w')
+#txt = r'$\mathbf{\mathrm{Additional\,Fig.\,1.}}$'
+#fig.text(0.5,-0.01, txt, ha = 'center', fontsize=18)
 plt.savefig('pdf_split.pdf', dpi=500)

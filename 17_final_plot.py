@@ -54,7 +54,7 @@ def plot_all(ssp):
     smap = ScalarMappable(cmap=cmap, norm=norm)
     smap.set_array([])
     # plot
-    fig, (ax1, ax2) = plt.subplots(1,2, figsize=(14,6))
+    fig, (ax1, ax2) = plt.subplots(1,2, figsize=(16,7))
     for name in res1.index:
         ## plot-1
         # colors for errorbars based on stellar mass
@@ -87,19 +87,20 @@ def plot_all(ssp):
     m = '{:.2f}'.format(m[0])
     ax2.plot(lin_reg_x,lin_reg_y,c='r',linestyle='-',linewidth=4)
     # plot-1: settings
-    ax1.set_ylim(0.50,1.05)
-    ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
+    ax1.set_ylim(0.54,1.03)
+    ax1.set_yticks([0.6,0.7,0.8,0.9,1.0])
+    #ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
     ax1.set_xlim(-1,11.0)
-    ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
-    ax1.set_xlabel('Lookback time [Gyr]',fontsize=18)
+    ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=20)
+    ax1.set_xlabel('Lookback time [Gyr]',fontsize=20)
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
     ax1.yaxis.set_minor_locator(AutoMinorLocator())
     ax1.tick_params(axis='both',which='major',direction='in', bottom = True, 
                             top = True,left = True, right = True, length=10, 
-                            labelsize=18)
+                            pad=15, labelsize=18)
     ax1.tick_params(axis='both',which='minor',direction='in', bottom = True, 
                             top = True,left = True, right = True, length=5, 
-                            labelsize=18)
+                            pad=15, labelsize=18)
     circ = mlines.Line2D([], [], color='grey', marker='o', linestyle='None',
                                   markersize=8, label='Infall time') 
     star = mlines.Line2D([], [], color='grey', marker='*', linestyle='None',
@@ -110,27 +111,29 @@ def plot_all(ssp):
     cbar_divider = make_axes_locatable(ax1)
     cbar_ax = cbar_divider.append_axes('right', size='5%', pad=0.05)
     cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0],cax=cbar_ax)
-    cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=18)
+    cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=20)
     cbar_ax.tick_params(axis='y', direction='in',length=10, labelsize=18)
     ax1.grid(False)
     ax1.set_facecolor('w')
     # plot-2 settings
-    ax2.set_ylim(-0.5,30.5)
-    ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
-    ax2.set_xlim(8.8,11.2)
-    ax2.set_xticks(ax2.get_xticks()[1:-1]) # Remove first and last ticks
+    ax2.set_ylim(0.,30.)
+    ax2.set_yticks([0.,5.,10.,15.,20.,25.,30.])
+    #ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
+    ax2.set_xlim(9.,11.)
+    ax2.set_xticks([9.0,9.5,10.0,10.5,11.0])
+    #ax2.set_xticks(ax2.get_xticks()[1:-1]) # Remove first and last ticks
     ax2.set_xlabel(r'$\log(M_\star/\mathrm{M}_\odot)$',
-                  fontsize=18)
+                  fontsize=20)
     ax2.set_ylabel(r'Fractional $M_\star$ increase from $t_\mathrm{inf}$ to $t_\mathrm{peri}$',
-                      fontsize=18)
+                      fontsize=20)
     ax2.xaxis.set_minor_locator(AutoMinorLocator())
     ax2.yaxis.set_minor_locator(AutoMinorLocator())
     ax2.tick_params(axis='both',which='major',direction='in', bottom = True, 
                             top = True,left = True, right = True, length=10, 
-                            labelsize=18)
+                            pad=15, labelsize=18)
     ax2.tick_params(axis='both',which='minor',direction='in', bottom = True, 
                             top = True,left = True, right = True, length=5, 
-                            labelsize=18)
+                            pad=15, labelsize=18)
     dia = mlines.Line2D([], [], color='k', marker='D', 
                         linestyle='None', markersize=8, 
                         label=r'$\frac{\Delta M_{\star,\mathrm{inf-peri}}}{M_{\star,\mathrm{final}}}\,\%\,:\,y$')

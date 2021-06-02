@@ -200,21 +200,21 @@ for x in peri_z:
 ax.set_ylim(0.,6.)
 ax.set_yticks([0.,1.,2.,3.,4.,5.,6.])
 ax.set_xlim(0.,1.6)
-ax.set_xticks([0.2,0.4,0.6,0.8,1.0,1.2,1.4])
+ax.set_xticks([0.0, 0.2,0.4,0.6,0.8,1.0,1.2,1.4])
 # ax.set_ylim(-0.1,7.1)
 # ax.set_yticks(ax.get_yticks()[1:-1]) # Remove first and last ticks
 # ax.set_xlim(-0.02,1.62)
 # ax.set_xticks(ax.get_xticks()[1:-1]) # Remove first and last ticks
-ax.set_xlabel(r'$z$', fontsize=18)
-ax.set_ylabel(r'$t \, \mathrm{[Gyr]}$', fontsize=18)
+ax.set_xlabel(r'$z$', fontsize=20)
+ax.set_ylabel(r'$t \, \mathrm{[Gyr]}$', fontsize=20)
 ax.xaxis.set_minor_locator(AutoMinorLocator())
 ax.yaxis.set_minor_locator(AutoMinorLocator())
 ax.tick_params(axis='both',which='major',direction='in', bottom = True, 
                 top = True, left = True, right = True, length = 10, 
-                labelsize=18)
+                labelsize=18, pad = 15)
 ax.tick_params(axis='both',which='minor',direction='in', bottom = True, 
                 top = True, left = True, right = True, length = 5, 
-                labelsize=18)
+                labelsize=18, pad = 15)
 #dyn = mlines.Line2D([], [], color=c, marker='None', linestyle=l5, linewidth=2,
 #                    label=r'$t_\mathrm{dyn}$')
 ffip = mlines.Line2D([], [], color=c, marker='None', linestyle=l2, linewidth=2,

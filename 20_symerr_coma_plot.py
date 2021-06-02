@@ -85,7 +85,7 @@ def plot_all(ssp):
     
     
     #### Plotting
-    fig, (ax1, ax2) = plt.subplots(1,2, figsize=(20,9))
+    fig, (ax1, ax2) = plt.subplots(1,2, figsize=(21,9))
     
     for name, log_Mi in zip(gmp_names, log_Ms):
         col = 'tab:gray'
@@ -234,17 +234,19 @@ def plot_all(ssp):
     ax2.plot(lin_reg_x,lin_reg_y,c='r', linestyle='--', linewidth=1.5)
     
     ### Plot setting cumMs - system error
-    ax1.set_ylim(0.75,1.05)
-    ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
-    ax1.set_xlim(0.,10.0)
-    ax1.set_xticks(ax1.get_xticks()[1:-1]) # Remove first and last ticks
+    ax1.set_ylim(0.77,1.01)
+    ax1.set_yticks([0.80,0.85,0.90,0.95,1.00])
+    #ax1.set_yticks(ax1.get_yticks()[1:-1]) # Remove first and last ticks
+    ax1.set_xlim(0.,9.5)
+    ax1.set_xticks([0.,1.,2.,3.,4.,5.,6.,7.,8.,9.])
+    #ax1.set_xticks(ax1.get_xticks()[1:-1]) # Remove first and last ticks
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
     ax1.yaxis.set_minor_locator(AutoMinorLocator())
     ax1.tick_params(axis='both',which='major',direction='in', bottom = True, 
-                       top = True,left = True, right = True, length=10, 
+                       top = True,left = True, right = True, length=10, pad=15,
                        labelsize=18)
     ax1.tick_params(axis='both',which='minor',direction='in', bottom = True, 
-                       top = True,left = True, right = True, length=5,
+                       top = True,left = True, right = True, length=5, pad=15,
                        labelsize=18)
     circ = mlines.Line2D([], [], color=col, marker='o', linestyle='None',
                               markersize=8, label='Infall time') 
@@ -265,24 +267,26 @@ def plot_all(ssp):
               bbox_to_anchor=(0.03,0.02), bbox_transform=ax1.transAxes)
     ax1.grid(False)
     ax1.set_facecolor('w')
-    ax1.set_xlabel('Lookback time [Gyr]',fontsize=18)
-    ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=18)
+    ax1.set_xlabel('Lookback time [Gyr]',fontsize=20)
+    ax1.set_ylabel(r'Fraction of cumulative $M_\star$ formed',fontsize=20)
     
     ### Plot setting cumMs - system error
-    ax2.set_ylim(-0.5,15.5)
-    ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
-    ax2.set_xlim(8.8,11.2)
-    ax2.set_xticks(ax2.get_xticks()[1:-1]) # Remove first and last ticks
-    ax2.set_xlabel(r'$\log(M_\star/\mathrm{M}_\odot)$', fontsize=18)
+    ax2.set_ylim(0.,14.)
+    ax2.set_yticks([0.,2.,4.,6.,8.,10.,12.,14.])
+    #ax2.set_yticks(ax2.get_yticks()[1:-1]) # Remove first and last ticks
+    ax2.set_xlim(9.,11.)
+    ax2.set_xticks([9.0,9.5,10.0,10.5,11.0])
+    #ax2.set_xticks(ax2.get_xticks()[1:-1]) # Remove first and last ticks
+    ax2.set_xlabel(r'$\log(M_\star/\mathrm{M}_\odot)$', fontsize=20)
     ax2.set_ylabel(r'Fractional $M_\star$ increase from $t_\mathrm{inf}$ to $t_\mathrm{peri}$', 
-                  fontsize=18)
+                  fontsize=20)
     ax2.xaxis.set_minor_locator(AutoMinorLocator())
     ax2.yaxis.set_minor_locator(AutoMinorLocator())
     ax2.tick_params(axis='both',which='major',direction='in', bottom = True, 
-                   top = True,left = True, right = True, length=10, 
+                   top = True,left = True, right = True, length=10, pad=15, 
                    labelsize=18)
     ax2.tick_params(axis='both',which='minor',direction='in', bottom = True, 
-                   top = True,left = True, right = True, length=5, 
+                   top = True,left = True, right = True, length=5, pad=15, 
                    labelsize=18)
     ax2.grid(False)
     ax2.set_facecolor('w')

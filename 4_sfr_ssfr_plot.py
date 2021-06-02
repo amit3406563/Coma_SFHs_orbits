@@ -190,12 +190,12 @@ def plots(ssp):
     ax2.set_xticks(ztks)
     ax2.set_xticklabels(z)
     
-    ax.set_xlabel('Lookback time [Gyr]',fontsize=18)
-    ax.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
-    ax2.set_xlabel(r'$z$',fontsize=18)
+    ax.set_xlabel('Lookback time [Gyr]',fontsize=20)
+    ax.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=20)
+    ax2.set_xlabel(r'$z$',fontsize=20)
     #ax3.set_ylabel(r'SFR [$\mathrm{M}_\odot\,\mathrm{yr}^{-1}\,\mathrm{Mpc}^{-3}$]',fontsize=18)
     #ax3.set_ylabel(r'rel. SFR [$\mathrm{Gyr}^{-1}$]',fontsize=18)
-    ax3.set_ylabel('Fraction of stars formed in the time interval',fontsize=18)
+    ax3.set_ylabel('Fraction of stars formed in the time interval',fontsize=20)
     
     ax.legend(ncol=2, handles=handles, frameon=True, framealpha=1.0, 
               edgecolor='k', fontsize=14, loc=2, bbox_to_anchor=(0.03,0.97), 
@@ -231,7 +231,7 @@ def plots(ssp):
                     labelsize=18)
     
     cbar = fig.colorbar(smap, ticks=[9., 9.5, 10.0, 10.5, 11.0], pad=0.10)
-    cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=18)
+    cbar.set_label(r'$\log(M_\star/\mathrm{M}_\odot)$',fontsize=20)
     cbar.ax.tick_params(axis='y', direction='in',  length=10, labelsize=18)
     plt.savefig(table_dir+'sfr_plot.pdf',dpi=500)
     
